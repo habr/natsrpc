@@ -16,7 +16,7 @@ pb:
 	protoc \
     --proto_path=. \
     --proto_path=.. \
-	--proto_path=../third_party \
-    --gogo_out=paths=source_relative:. \
+    --proto_path=../third_party \
+    --go_out=paths=source_relative:. \
     --natsrpc_out=paths=source_relative:. \
     *.proto
