@@ -8,36 +8,36 @@
 ```
 
 ## What is NATSRPC
-> NATSRPC is based on [NATS](https://nats.io /) as a message communication, use [gRPC](https://www.grpc.io /) way to define the RPC framework of the interface
+> NATSRPC 是一个基于[NATS](https://nats.io/)作为消息通信，使用[gRPC](https://www.grpc.io/)的方式来定义接口的RPC框架
 
 <p align="center">
-  <span>English</span> |
-  <a href="README.cn.md#readme">中文</a>
+  <a href="README.md#readme">English</a> |
+  <span>中文</span>
 </p>
 
 ![GitHub release (with filter)](https://img.shields.io/github/v/release/byebyebruce/natsrpc)
 ![](https://hits.sh/github.com/byebyebruce/natsrpc/doc/hits.svg?label=visit)
 
 ## Motivation  
-NATS needs to manually define cumbersome and error-prone code such as subject, request, reply, handler, etc. to send and receive messages.
-gRPC needs to be connected to the server endpoint to send the request.
-The purpose of NATRPC is to define the interface like gRPC. Like NATS, it does not care about the specific network location. It only needs to listen and send to complete the RPC call.
+NATS收发消息需要手动定义subject，request，reply，handler等繁琐且易出错的代码。
+gRPC需要连接到可知endpoint才能发送请求。
+NATRPC的目的就是要像gRPC一样定义接口，像NATS一样不关心具体网络位置，只需要监听和发送就能完成RPC调用。
 
 ## Feature
-* Use the gRPC interface to define the method, which is simple to use and generates code with one click
-* Support spatial isolation, you can also specify the id to send
-* Multiple services can be load balanced (random in the same group of nats)
-* Support Header and return error
-* Support single coroutine and multi-coroutine handle
-* Support middleware
-* Support delayed reply to messages
-* Support custom encoder
+* 使用gRPC接口定义方式，使用简单，一键生成代码
+* 支持空间隔离,也可以指定id发送
+* 多服务可以负载均衡(nats的同组内随机)
+* 支持Header和返回Error
+* 支持单协程和多协程handle
+* 支持中间件
+* 支持延迟回复消息
+* 支持自定义编码器
 
 ## How It Works
-The upper layer pairs nats through Server, Service, and Client.Conn and Subscription are encapsulated.
-The underlying layer transmits messages through nats request and publish.A service will create a subscription with the service name as the subject, and if there is a publish method, a sub will be created to receive the publish.
-When the client sends a request, the subject will be the name of the service, and the header of nats msg will pass the method name.
-After the service receives the message, it takes out the method name, and then calls the corresponding handler. The result returned by the handler will be returned to the client through the reply subject of nats msg.
+上层通过Server、Service、Client对nats.Conn和Subscription进行封装。  
+底层通过nats的request和publish来传输消息。一个Service会创建一个以service name为subject的Subscription，如果有publish方法会在创建一个用于接收publish的sub。  
+Client发请求时会的subject是service 的name，并且nats msg的header传递method name。  
+Service收到消息后取出method name，然后调用对应的handler，handler返回的结果会通过nats msg的reply subject返回给Client。
 
 ## Install Tools
 1. protoc(v3.17.3) 
@@ -56,11 +56,11 @@ After the service receives the message, it takes out the method name, and then c
 
 ## Quick Start
 * [nats-server](https://github.com/nats-io/nats-server/releases)>=2.2.0
-1. Reference package
+1. 引用包
    ```shell
    go get github.com/byebyebruce/natsrpc
    ```
-2. Define the service interface example.proto
+2. 定义服务接口 example.proto
     ```
     syntax = "proto3";
 
@@ -80,14 +80,14 @@ After the service receives the message, it takes out the method name, and then c
     }
     ```
    
-3. Generate client and server code
+3. 生成客户端和服务端代码
     ```shell
     protoc --proto_path=. \
     --gogo_out=paths=source_relative:. \
     --natsrpc_out=paths=source_relative:. \
     *.proto
     ```
-4. Server implements the interface at the end and create a service
+4. Server端实现接口并创建服务
    ```
    type HelloSvc struct {
    }
@@ -114,7 +114,7 @@ After the service receives the message, it takes out the method name, and then c
 
    ```
    
-5. Client calls rpc
+5. Client 调用 rpc
    ```
    client:=natsrpc.NewClient(conn)
    
@@ -126,15 +126,15 @@ After the service receives the message, it takes out the method name, and then c
 [here](./example)
 
 ## Bench Tool
-1. Request `go run ./example/tool/request_bench -url=nats://127.0.0.1:4222`
-2. Broadcast `go run ./example/tool/publish_bench -url=nats://127.0.0.1:4222`
+1. 请求 `go run ./example/tool/request_bench -url=nats://127.0.0.1:4222`
+2. 广播 `go run ./example/tool/publish_bench -url=nats://127.0.0.1:4222`
 
 ## TODO
--[x] The service definition file is changed to the gRPC standard
--[x] Support return error
--[x] Support Header
--[x] Generate Client interface
--[x] Support middleware
--[x] Default multithreading, support a single thread at the same time
--[] Support goroutine pool
--[] Support byte pool
+- [x] service 定义文件改成gRPC标准
+- [x] 支持返回错误
+- [x] 支持Header
+- [x] 生成Client接口
+- [x] 支持中间件
+- [x] 默认多线程，同时支持单一个线程
+- [ ] 支持goroutine池
+- [ ] 支持字节池
