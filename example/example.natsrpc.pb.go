@@ -7,7 +7,7 @@ package example
 
 import (
 	context "context"
-	natsrpc "github.com/byebyebruce/natsrpc"
+	natsrpc "github.com/LeKovr/natsrpc"
 	reflect "reflect"
 )
 

@@ -16,7 +16,7 @@
 </p>
 
 ![GitHub release (with filter)](https://img.shields.io/github/v/release/byebyebruce/natsrpc)
-![](https://hits.sh/github.com/byebyebruce/natsrpc/doc/hits.svg?label=visit)
+![](https://hits.sh/github.com/LeKovr/natsrpc/doc/hits.svg?label=visit)
 
 ## Motivation  
 NATS needs to manually define cumbersome and error-prone code such as subject, request, reply, handler, etc. to send and receive messages.
@@ -51,21 +51,21 @@ After the service receives the message, it takes out the method name, and then c
    ```
 3. protoc-gen-natsrpc 
    ```shell
-   go install github.com/byebyebruce/natsrpc/cmd/protoc-gen-natsrpc@v0.7.0
+   go install github.com/LeKovr/natsrpc/cmd/protoc-gen-natsrpc@v0.7.0
    ```
 
 ## Quick Start
 * [nats-server](https://github.com/nats-io/nats-server/releases)>=2.2.0
 1. Reference package
    ```shell
-   go get github.com/byebyebruce/natsrpc
+   go get github.com/LeKovr/natsrpc
    ```
 2. Define the service interface example.proto
     ```
     syntax = "proto3";
 
     package example;
-    option go_package = "github.com/byebyebruce/natsrpc/example;example";
+    option go_package = "github.com/LeKovr/natsrpc/example;example";
 
     message HelloRequest {
       string name = 1;

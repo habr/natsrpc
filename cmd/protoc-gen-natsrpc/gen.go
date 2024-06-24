@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/byebyebruce/natsrpc"
+	"github.com/LeKovr/natsrpc"
 
 	"google.golang.org/protobuf/compiler/protogen"
 	"google.golang.org/protobuf/proto"
@@ -15,7 +15,7 @@ import (
 
 const (
 	contextPackage = protogen.GoImportPath("context")
-	natsrpcPackage = protogen.GoImportPath("github.com/byebyebruce/natsrpc")
+	natsrpcPackage = protogen.GoImportPath("github.com/LeKovr/natsrpc")
 	//natsPackage    = protogen.GoImportPath("github.com/nats-io/nats.go")
 	protoPackage   = protogen.GoImportPath("google.golang.org/protobuf/proto")
 	fmtPackage     = protogen.GoImportPath("fmt")

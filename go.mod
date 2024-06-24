@@ -1,4 +1,4 @@
-module github.com/byebyebruce/natsrpc
+module github.com/LeKovr/natsrpc
 
 go 1.21.3
 
@@ -14,5 +14,4 @@ require (
 	github.com/nats-io/nuid v1.0.1 // indirect
 	golang.org/x/crypto v0.18.0 // indirect
 	golang.org/x/sys v0.16.0 // indirect
-	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 )

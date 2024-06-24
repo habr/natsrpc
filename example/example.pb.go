@@ -7,7 +7,7 @@
 package example
 
 import (
-	_ "github.com/byebyebruce/natsrpc"
+	_ "github.com/LeKovr/natsrpc"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

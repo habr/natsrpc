@@ -8,8 +8,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/byebyebruce/natsrpc"
-	"github.com/byebyebruce/natsrpc/example"
+	"github.com/LeKovr/natsrpc"
+	"github.com/LeKovr/natsrpc/example"
 	"github.com/nats-io/nats.go"
 )
 

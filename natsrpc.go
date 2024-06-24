@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/byebyebruce/natsrpc/encode/gogopb"
+	"github.com/LeKovr/natsrpc/encode/gogopb"
 )
 
 var (
