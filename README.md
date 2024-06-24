@@ -8,7 +8,7 @@
 ```
 
 ## What is NATSRPC
-> NATSRPC is based on [NATS](https://nats.io /) as a message communication, use [gRPC](https://www.grpc.io /) way to define the RPC framework of the interface
+> NATSRPC is based on [NATS](https://nats.io/) as a message communication, use [gRPC](https://www.grpc.io/) way to define the RPC framework of the interface
 
 <p align="center">
   <span>English</span> |
