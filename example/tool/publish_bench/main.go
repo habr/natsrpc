@@ -89,7 +89,7 @@ func main() {
 					return
 				default:
 				}
-				if err := exampleClient.HelloToAll(req); nil != err {
+				if err := exampleClient.HelloToAll(ctx, req); nil != err {
 					atomic.AddUint32(&totalFailed, 1)
 					continue
 				}

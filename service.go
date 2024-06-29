@@ -61,6 +61,7 @@ func (s *Service) Call(ctx context.Context, methodName string, b []byte, interce
 	if err := s.server.Decode(b, req); err != nil {
 		return nil, err
 	}
+	ctx = otelExtract(ctx)
 	resp, err := s.call(ctx, m, req, interceptor)
 	if err != nil {
 		return nil, err

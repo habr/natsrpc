@@ -19,7 +19,7 @@ type {{ $clientInterface }} interface {
 		{{ .Name }}(ctx context.Context, req *{{ .Request }}, opt ...natsrpc.CallOption)(*{{ .Reply }}, error)
 	{{- else }}
 		{{ .Comment -}}
-		{{ .Name }}(notify *{{ .Request }}, opt ...natsrpc.CallOption) error
+		{{ .Name }}(ctx context.Context, notify *{{ .Request }}, opt ...natsrpc.CallOption) error
 	{{- end }}
 {{- end }}
 }
@@ -48,8 +48,8 @@ func New{{ $clientInterface }}(c natsrpc.ClientInterface) {{ $clientInterface }}
 		return rep, err
 		}
 	{{- else }}
-		func (c *{{ $clientWrapperName }}) {{ .Name }}(notify *{{ .Request }}, opt ...natsrpc.CallOption) error {
-		return c.c.Publish({{ $ServiceNameVar }}, "{{ .Name }}", notify, opt...)
+		func (c *{{ $clientWrapperName }}) {{ .Name }}(ctx context.Context, notify *{{ .Request }}, opt ...natsrpc.CallOption) error {
+		return c.c.Publish(ctx, {{ $ServiceNameVar }}, "{{ .Name }}", notify, opt...)
 		}
 	{{- end }}
 {{- end }}

@@ -35,7 +35,7 @@ type ServiceRegistrar interface {
 // ClientInterface 客户端接口
 type ClientInterface interface {
 	// Publish 发布
-	Publish(service, method string, req interface{}, opt ...CallOption) error
+	Publish(ctx context.Context, service, method string, req interface{}, opt ...CallOption) error
 
 	// Request 请求
 	Request(ctx context.Context, service, method string, req interface{}, rep interface{}, opt ...CallOption) error

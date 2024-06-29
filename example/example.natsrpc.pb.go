@@ -73,7 +73,7 @@ const (
 )
 
 type GreetingToAllNRClient interface {
-	HelloToAll(notify *HelloRequest, opt ...natsrpc.CallOption) error
+	HelloToAll(ctx context.Context, notify *HelloRequest, opt ...natsrpc.CallOption) error
 }
 
 type _GreetingToAllNRClientImpl struct {
@@ -87,8 +87,8 @@ func NewGreetingToAllNRClient(c natsrpc.ClientInterface) GreetingToAllNRClient {
 	}
 	return ret
 }
-func (c *_GreetingToAllNRClientImpl) HelloToAll(notify *HelloRequest, opt ...natsrpc.CallOption) error {
-	return c.c.Publish(GreetingToAll_NRServiceName, "HelloToAll", notify, opt...)
+func (c *_GreetingToAllNRClientImpl) HelloToAll(ctx context.Context, notify *HelloRequest, opt ...natsrpc.CallOption) error {
+	return c.c.Publish(ctx, GreetingToAll_NRServiceName, "HelloToAll", notify, opt...)
 }
 
 var GreetingToAll_NRServiceDesc = natsrpc.ServiceDesc{

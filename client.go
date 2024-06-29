@@ -30,8 +30,8 @@ func NewClient(conn *nats.Conn, opts ...ClientOption) *Client {
 }
 
 // Publish 发布
-func (c *Client) Publish(service, method string, req interface{}, opt ...CallOption) error {
-	return c.call(nil, service, method, req, nil, opt...)
+func (c *Client) Publish(ctx context.Context, service, method string, req interface{}, opt ...CallOption) error {
+	return c.call(ctx, service, method, req, nil, opt...)
 }
 
 // Request 请求
@@ -44,7 +44,9 @@ func (c *Client) call(ctx context.Context, service, method string, req interface
 	for _, v := range opt {
 		v(callOpt)
 	}
-
+	if ctx != nil { // else raise panic
+		otelInject(ctx, callOpt)
+	}
 	payload, err := c.opt.encoder.Encode(req)
 	if err != nil {
 		return err
