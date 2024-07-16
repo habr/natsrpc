@@ -3,7 +3,6 @@ package natsrpc
 import (
 	"context"
 	"errors"
-	"fmt"
 	"sync"
 
 	"github.com/nats-io/nats.go"
@@ -28,10 +27,6 @@ type Server struct {
 
 // NewServer 构造器
 func NewServer(conn *nats.Conn, option ...ServerOption) (*Server, error) {
-	if !conn.IsConnected() {
-		return nil, fmt.Errorf("conn is not connected")
-	}
-
 	options := DefaultServerOptions
 	for _, v := range option {
 		v(&options)
