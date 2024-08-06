@@ -1,0 +1,5 @@
+{
+    "nats_url": "nats://localhost:4222",
+    "nats_user": "your_username",
+    "nats_password": "your_password"
+}
